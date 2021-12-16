@@ -1,7 +1,5 @@
 package ru.stqa.pft.sandbox;
 
-
-
 public class MyFirstProgram {
 
   public static void main(String[] args) {
@@ -28,20 +26,20 @@ public class MyFirstProgram {
     //System.out.println("Координаты точки p2 = (" + p2.x + "," + p2.y + ")");
 
     System.out.println("Формула расчета расстояния между точками на плоскости: Растояние = корень/(x1-x2)^2+(y1-y2)^2/");
-    System.out.println("Расстояние между точками на плоскости = корень ( " + distance(p1, p2) * distance(p1, p2) + " + " + p1 + ") =" + distance(p1, p2));
+    System.out.println("Расстояние между точками на плоскости = корень ( " + distance(p1, p2)*distance(p1, p2) + " + " + p1 + ") =" + distance(p1, p2));
     System.out.println("Расстояние между точками p1 и p2 = (" + p1 + "," + p2 + ")");
     System.out.println(p2.distance(p1));
     System.out.println(p1.distance(p2));
-    // System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
+   // System.out.println("Площадь прямоугольника со сторонами " + r.a + " и " + r.b + " = " + r.area());
   }
 
   public static double distance(Point p1, Point p2) {
     double px = (p1.x - p2.x);
-    //  System.out.println("dx^2= " + px*px);
+  //  System.out.println("dx^2= " + px*px);
     double py = (p1.y - p2.y);
-    //  System.out.println("dy^2= " + py*py);
+  //  System.out.println("dy^2= " + py*py);
 
-    //  System.out.println("D^2= " + (px * px + py * py));
+  //  System.out.println("D^2= " + (px * px + py * py));
 
     return Math.sqrt(px * px + py * py);
 
@@ -51,5 +49,5 @@ public class MyFirstProgram {
     System.out.println("Hello, " + somebody + "!");
   }
 
-}
+  }
 
