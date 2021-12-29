@@ -217,11 +217,11 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
-          <line>93</line>
-          <properties class="Main" method="oper">
+          <line>131</line>
+          <properties class="Main" method="romOrArab">
             <option name="EMULATED" value="true" />
           </properties>
-          <option name="timeStamp" value="75" />
+          <option name="timeStamp" value="77" />
         </line-breakpoint>
         <breakpoint type="java-exception">
           <properties class="java.lang.ArithmeticException" package="java.lang" />

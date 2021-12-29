@@ -6,7 +6,7 @@
 //решение должно содержать данный класс
 class Main {
   public static void main(String[] args) {
-    String[] in = {"     1 + 1       ", " 5ESTY ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV", null};
+    String[] in = {" 4 + 3,5 ", " 4.5 + 3 ", "     9 - 10       ", "  -1   ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV", null};
 
     for (String s : in) {
       System.out.println("Входящие данные: " + s + " расчитанные данные = " + calc(s));
@@ -21,7 +21,8 @@ class Main {
       return null;
     }//проверка на нулл
     inputString = inputString.toUpperCase();//Регистр вверх
-    inputString = chist(inputString);//чистим от пробелов
+    inputString = chist(inputString);//чистим от пробелов и проверяем на точки и запятые
+
     if (inputString.length() < 3) {
       try {
         throw new MyException();
@@ -30,9 +31,12 @@ class Main {
         return null;
       }
     }//неверный ввод
-
-    String vid = romOrArab(inputString);//вид переменных араб или рим
-
+String vid="";
+  try {
+    vid = romOrArab(inputString);//вид переменных араб или рим
+    } catch (MyException e) {
+      System.out.println("исключение.");
+    }
     String oper = "";
     try {
       oper = oper(inputString);//вид действия +-*/ какой внутри
@@ -60,10 +64,14 @@ class Main {
   private static String chist(String x) {
     String z = "";
     char[] y = x.toCharArray();
-    for (char c : y)
+    for (char c : y) {
+      if (c == '.'||c == ',') {
+        return "-1";
+      }
       if (c != ' ') {
         z = z + c;
       }
+    }
     return z;
   }
 
@@ -121,7 +129,7 @@ class Main {
   }
 
   //Проверка Араб или Рим
-  private static String romOrArab(String inputString) {
+  private static String romOrArab(String inputString) throws MyException{
     int y = 0;
     String cal = "";
     for (int i = 0; i < 10; i++) {
@@ -225,7 +233,7 @@ class Main {
       return null;
     }//проверка на условие значения цифр
     int sum = a1 - a2;
-    if (sum < 0) {
+    if (sum <= 0) {
       return null;
     }
     x = x + sum;
