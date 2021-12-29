@@ -6,7 +6,7 @@
 //решение должно содержать данный класс
 class Main {
   public static void main(String[] args) {
-    String[] in = {"1+1", "5ESTY", "-1+3", "1 ", "2-1", "10+11", "1-2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV", null};
+    String[] in = {"     1 + 1       ", " 5ESTY ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV", null};
 
     for (String s : in) {
       System.out.println("Входящие данные: " + s + " расчитанные данные = " + calc(s));
@@ -21,7 +21,8 @@ class Main {
       return null;
     }//проверка на нулл
     inputString = inputString.toUpperCase();//Регистр вверх
-    if (inputString.length() < 3 || inputString.length() > 7) {
+    inputString = chist(inputString);//чистим от пробелов
+    if (inputString.length() < 3) {
       try {
         throw new MyException();
       } catch (MyException e) {
@@ -54,6 +55,18 @@ class Main {
     }
     return ravno;
   }
+
+  //чистим от пробелов
+  private static String chist(String x) {
+    String z = "";
+    char[] y = x.toCharArray();
+    for (char c : y)
+      if (c != ' ') {
+        z = z + c;
+      }
+    return z;
+  }
+
 
   //Равно вывод, завершающий метод
   private static String ravno(String input, String deystvie, String vidCifr) throws MyException {
@@ -313,5 +326,6 @@ class Main {
     return inputString;
   }
 }
+
 class MyException extends Exception {
 }
