@@ -1,62 +1,29 @@
 //Ты можешь добавлять свои импорты
-//import java.io.IOException;
-//import java.lang.Exception;
-//import java.lang.NumberFormatException;
 
 //решение должно содержать данный класс
 class Main {
   public static void main(String[] args) {
-    String[] in = {" 4 + 3,5 ", " 4.5 + 3 ", "     9 - 10       ", "  -1   ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV", null};
+    String[] in = {"IV-VI", "II- I", "1+I", "      I    + I    ", " 4 + 3,5 ", " 4.5 + 3 ", "     9 - 10       ", "  -1   ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV"};
 
     for (String s : in) {
       System.out.println("Входящие данные: " + s + " расчитанные данные = " + calc(s));
     }
-    // System.out.println("Входящие данные: " + "XI+XV" + " расчитанные данные = " + calc("XI+XV"));
   }
 
   //Решение должно содержать данный метод
   public static String calc(String inputString) {
-
-    if (inputString == null) {
-      return null;
-    }//проверка на нулл
+    String t = inputString;
     inputString = inputString.toUpperCase();//Регистр вверх
     inputString = chist(inputString);//чистим от пробелов и проверяем на точки и запятые
-
-    if (inputString.length() < 3) {
-      try {
-        throw new MyException();
-      } catch (MyException e) {
-        System.out.println("исключение!");
-        return null;
-      }
-    }//неверный ввод
-String vid="";
-  try {
-    vid = romOrArab(inputString);//вид переменных араб или рим
-    } catch (MyException e) {
-      System.out.println("исключение.");
-    }
-    String oper = "";
-    try {
-      oper = oper(inputString);//вид действия +-*/ какой внутри
-
-    } catch (MyException e) {
-      System.out.println("исключение.");
-    }
     String ravno = "";
+
     try {
-      ravno = ravno(inputString, oper, vid);
-    } catch (MyException e) {
-      System.out.println("исключение.");
+
+      ravno = ravno(inputString, romOrArab(inputString));
+    } catch (Exception e) {
+      System.err.println("исключение операций по (" + t + ")");
     }
-    if (ravno == null) {
-      try {
-        throw new MyException();
-      } catch (MyException e) {
-        System.out.println("исключение.");
-      }
-    }
+
     return ravno;
   }
 
@@ -65,7 +32,7 @@ String vid="";
     String z = "";
     char[] y = x.toCharArray();
     for (char c : y) {
-      if (c == '.'||c == ',') {
+      if (c == '.' || c == ',') {
         return "-1";
       }
       if (c != ' ') {
@@ -75,114 +42,83 @@ String vid="";
     return z;
   }
 
-
   //Равно вывод, завершающий метод
-  private static String ravno(String input, String deystvie, String vidCifr) throws MyException {
-    if (deystvie == null || vidCifr == null) {
-      return null;
-    }
+  private static String ravno(String input, String deystvie[]) throws Exception {
+
     String ravno = "";
-    if (deystvie.equals("P")) {
-      ravno = sum(input, vidCifr);
-    }
-    if (deystvie.equals("M")) {
-      ravno = minus(input, vidCifr);
-    }
-    if (deystvie.equals("U")) {
-      ravno = umn(input, vidCifr);
-    }
-    if (deystvie.equals("D")) {
-      ravno = del(input, vidCifr);
+    if (deystvie[2].equals("P")) {
+      ravno = sum(input, deystvie[3]);
     }
 
+    if (deystvie[2].equals("M") && romOrArab(input)[3].equals("A")) {
+      ravno = minus(input, deystvie[3]);
+    }
+    if (deystvie[2].equals("U")) {
+      ravno = umn(input, deystvie[3]);
+    }
+    if (deystvie[2].equals("D")) {
+      ravno = del(input, deystvie[3]);
+    }
+    if (deystvie[2].equals("M") && Integer.parseInt(rta(romOrArab(input)[0])) > Integer.parseInt(rta(romOrArab(input)[1])) && romOrArab(input)[3].equals("R")) {
+      ravno = minus(input, deystvie[3]);
+    } else {
+      new Exception();
+    }
     return ravno;
   }
 
-  //Проверка какие операторы внутри
-  private static String oper(String inputString) throws MyException {
-    String znak = "";
-    char[] sim = inputString.toCharArray();
-    int kol = 0;
-    for (char s : sim) {
-      if (s == '+') {
-        kol++;
-        znak = "P";
-      }
-      if (s == '-') {
-        kol++;
-        znak = "M";
-      }
-      if (s == '*') {
-        kol++;
-        znak = "U";
-      }
-      if (s == '/') {
-        kol++;
-        znak = "D";
-      }
-    }
-    if (kol == 0 || kol > 1) {
-      return null;
-    }//проверка на наличие 2х разных операторов
-
-    return znak;
-  }
-
+  //Проверка какие операторы внутри и цифры
   //Проверка Араб или Рим
-  private static String romOrArab(String inputString) throws MyException{
-    int y = 0;
-    String cal = "";
-    for (int i = 0; i < 10; i++) {
-      char m = (char) (i + '0');
-      if (inputString.charAt(0) == m) {
-        y++;
-      }//проверка первого символа на Рим
-      if (inputString.charAt((inputString.length() - 1)) == m) {
-        y++;
-        if (y > 1) {
-          break;
-        }
-      }//проверка последнего символа на Рим
+  private static String[] romOrArab(String inputString) {
+    String[] p = inputString.split("\\+");
+    String[] m = inputString.split("\\-");
+    String[] u = inputString.split("\\*");
+    String[] d = inputString.split("/");
+    String[] vid = new String[4];
+    if (p.length == 2) {
+      vid[0] = p[0];
+      vid[1] = p[1];
+      vid[2] = "P";
+      vid[3] = vid(inputString);
     }
-    if (y == 1) {
-      return null;
-    }//не Рим и не Араб
-
-    if (y == 2) {
-      if (inputString.charAt(1) != 'I' && inputString.charAt(1) != 'V' && inputString.charAt(1) != 'X') {
-        if (inputString.charAt(inputString.length() - 2) != 'I' && inputString.charAt(inputString.length() - 2) != 'V' && inputString.charAt(inputString.length() - 2) != 'X') {
-          cal = "A";
-        }//Араб с проверкой 2 и предпоследнего символа
-      }
+    if (m.length == 2) {
+      vid[0] = m[0];
+      vid[1] = m[1];
+      vid[2] = "M";
+      vid[3] = vid(inputString);
     }
-
-    if (y == 0) {
-      for (int i = 0; i < 10; i++) {
-        char m = (char) (i + '0');
-        if (inputString.charAt(1) == m) {
-          return null;
-        }//проверка второго символа на Рим
-        if (inputString.charAt((inputString.length() - 2)) == m) {
-          return null;
-        }
-
-      }
-      cal = "R";//Рим
-    }//проверка пред-последнего символа на Рим
-    if (cal.equals("")) {
-      return null;
+    if (u.length == 2) {
+      vid[0] = u[0];
+      vid[1] = u[1];
+      vid[2] = "U";
+      vid[3] = vid(inputString);
     }
-    return cal;
+    if (d.length == 2) {
+      vid[0] = d[0];
+      vid[1] = d[1];
+      vid[2] = "D";
+      vid[3] = vid(inputString);
+    }
+    return vid;
   }
 
+  //            Вид цифр араб или рим
+  private static String vid(String v) {
+    String vid = "R";
+    for (int i = 0; i < 10; i++) {
+      char mi = (char) (i + '0');
+      if (v.charAt(0) == mi) {
+        vid = "A";
+        break;
+      }
+    }
+    return vid;
+  }
 
   // Сумма
-  private static String sum(String inputString, String rab) {
+  private static String sum(String inputString, String rab) throws Exception {
 
     String[] vmas = inputString.split("\\+");//в масив 2 числа или более
-    if (vmas.length > 2) {
-      return null;
-    } //Проверка на колво одинаковых операторов
 
     if (rab.equals("R")) {
       vmas[0] = rta(vmas[0]);
@@ -191,16 +127,10 @@ String vid="";
 
     int a1 = 0, a2 = 0;
     String x = "";
-
+    aprim(vmas[0], vmas[1], inputString);
     a1 = Integer.parseInt(vmas[0]);
     a2 = Integer.parseInt(vmas[1]);
 
-    if (a2 <= 0 || a2 > 10) {
-      return null;
-    } //проверка на условие значения цифр
-    if (a1 <= 0 || a1 > 10) {
-      return null;
-    }//проверка на условие значения цифр
     int sum = a1 + a2;
     x = x + sum;
     if (rab.equals("R")) {
@@ -210,62 +140,42 @@ String vid="";
   }
 
   // Разность
-  private static String minus(String inputString, String rab) {
+  private static String minus(String inputString, String rab) throws Exception {
 
     String[] vmas = inputString.split("-");//в масив 2 значения или более
-    if (vmas.length > 2) {
-      return null;
-    } //Проверка на колво одинаковых операторов
 
     if (rab.equals("R")) {
       vmas[0] = rta(vmas[0]);
       vmas[1] = rta(vmas[1]);
     }//перевод из рима в араб
-
+    aprim(vmas[0], vmas[1], inputString);
     int a1 = 0, a2 = 0;
     String x = "";
     a1 = Integer.parseInt((vmas[0]));
     a2 = Integer.parseInt(vmas[1]);
-    if (a2 <= 0 || a2 > 10) {
-      return null;
-    } //проверка на условие значения цифр
-    if (a1 <= 0 || a1 > 10) {
-      return null;
-    }//проверка на условие значения цифр
     int sum = a1 - a2;
-    if (sum <= 0) {
-      return null;
-    }
+
     x = x + sum;
     if (rab.equals("R")) {
       x = atr(x);
-    }//перевод из  араб в рима
+    }
     return x;
   }
 
   // Произведение
-  private static String umn(String inputString, String rab) {
+  private static String umn(String inputString, String rab) throws Exception {
 
     String[] vmas = inputString.split("\\*");//в масив 2 значения или более
-    if (vmas.length > 2) {//Проверка на колво одинаковых операторов
-      return null;
-    }
-
     if (rab.equals("R")) {
       vmas[0] = rta(vmas[0]);
       vmas[1] = rta(vmas[1]);
     }
-
+    aprim(vmas[0], vmas[1], inputString);
     int a1 = 0, a2 = 0;
     String x = "";
     a1 = Integer.parseInt((vmas[0]));
     a2 = Integer.parseInt(vmas[1]);
-    if (a2 <= 0 || a2 > 10) {
-      return null;
-    } //проверка на условие значения цифр
-    if (a1 <= 0 || a1 > 10) {
-      return null;
-    }//проверка на условие значения цифр
+
     int sum = a1 * a2;
     x = x + sum;
     if (rab.equals("R")) {
@@ -275,28 +185,19 @@ String vid="";
   }
 
   // Деление
-  private static String del(String inputString, String rab) {
+  private static String del(String inputString, String rab) throws Exception {
 
     String[] vmas = inputString.split("/");//в масив 2 значения или более
-    if (vmas.length > 2) {//Проверка на колво одинаковых операторов
-      return null;
-    }
 
     if (rab.equals("R")) {
       vmas[0] = rta(vmas[0]);
       vmas[1] = rta(vmas[1]);
     }
-
+    aprim(vmas[0], vmas[1], inputString);
     int a1 = 0, a2 = 0;
     String x = "";
     a1 = Integer.parseInt((vmas[0]));
     a2 = Integer.parseInt(vmas[1]);
-    if (a2 <= 0 || a2 > 10) {
-      return null;
-    } //проверка на условие значения цифр
-    if (a1 <= 0 || a1 > 10) {
-      return null;
-    }//проверка на условие значения цифр
     int sum = a1 / a2;
     x = x + sum;
     if (rab.equals("R")) {
@@ -333,7 +234,14 @@ String vid="";
     }
     return inputString;
   }
-}
 
-class MyException extends Exception {
+  //проверка рим + араб на исключение
+  private static void aprim(String a, String b, String c) throws Exception {
+
+    if (Integer.parseInt(a) >= 1 && Integer.parseInt(b) >= 1 && Integer.parseInt(a) <= 10 && Integer.parseInt(b) <= 10) {
+    } else {
+      throw new Exception();
+    }
+  }
+
 }
