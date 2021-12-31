@@ -2,8 +2,8 @@
 
 //решение должно содержать данный класс
 class Main {
-  public static void main(String[] args) {
-    String[] in = {"IV-VI", "II- I", "1+I", "      I    + I    ", " 4 + 3,5 ", " 4.5 + 3 ", "     9 - 10       ", "  -1   ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1+1+2", "1-2+2", "", "III+XIII", "XI+XV"};
+  public static void main(String[] args) throws Exception {
+    String[] in = {"1+1+2", null, "II- I", "5+V", "   I  +  I", "V-VI", " 4 + 3,5 ", " 4.5 + 3 ", "     9 - 10       ", "  -1   ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1-2+2", "", "III+XIII", "XI+XV"};
 
     for (String s : in) {
       System.out.println("Входящие данные: " + s + " расчитанные данные = " + calc(s));
@@ -13,17 +13,14 @@ class Main {
   //Решение должно содержать данный метод
   public static String calc(String inputString) {
     String t = inputString;
-    inputString = inputString.toUpperCase();//Регистр вверх
-    inputString = chist(inputString);//чистим от пробелов и проверяем на точки и запятые
     String ravno = "";
-
     try {
-
+      inputString = inputString.toUpperCase();//Регистр вверх
+      inputString = chist(inputString);//чистим от пробелов
       ravno = ravno(inputString, romOrArab(inputString));
     } catch (Exception e) {
-      System.err.println("исключение операций по (" + t + ")");
+      System.err.println("исключение операций по (" + t + ")" + e);
     }
-
     return ravno;
   }
 
@@ -32,9 +29,6 @@ class Main {
     String z = "";
     char[] y = x.toCharArray();
     for (char c : y) {
-      if (c == '.' || c == ',') {
-        return "-1";
-      }
       if (c != ' ') {
         z = z + c;
       }
@@ -50,7 +44,7 @@ class Main {
       ravno = sum(input, deystvie[3]);
     }
 
-    if (deystvie[2].equals("M") && romOrArab(input)[3].equals("A")) {
+    if (deystvie[2].equals("M")) {
       ravno = minus(input, deystvie[3]);
     }
     if (deystvie[2].equals("U")) {
@@ -59,17 +53,13 @@ class Main {
     if (deystvie[2].equals("D")) {
       ravno = del(input, deystvie[3]);
     }
-    if (deystvie[2].equals("M") && Integer.parseInt(rta(romOrArab(input)[0])) > Integer.parseInt(rta(romOrArab(input)[1])) && romOrArab(input)[3].equals("R")) {
-      ravno = minus(input, deystvie[3]);
-    } else {
-      new Exception();
-    }
+
     return ravno;
   }
 
   //Проверка какие операторы внутри и цифры
   //Проверка Араб или Рим
-  private static String[] romOrArab(String inputString) {
+  private static String[] romOrArab(String inputString) throws Exception {
     String[] p = inputString.split("\\+");
     String[] m = inputString.split("\\-");
     String[] u = inputString.split("\\*");
@@ -127,7 +117,7 @@ class Main {
 
     int a1 = 0, a2 = 0;
     String x = "";
-    aprim(vmas[0], vmas[1], inputString);
+    uslovieOdinakPologChiselOt1Do10(vmas[0], vmas[1]);
     a1 = Integer.parseInt(vmas[0]);
     a2 = Integer.parseInt(vmas[1]);
 
@@ -148,16 +138,21 @@ class Main {
       vmas[0] = rta(vmas[0]);
       vmas[1] = rta(vmas[1]);
     }//перевод из рима в араб
-    aprim(vmas[0], vmas[1], inputString);
+    uslovieOdinakPologChiselOt1Do10(vmas[0], vmas[1]);
     int a1 = 0, a2 = 0;
     String x = "";
     a1 = Integer.parseInt((vmas[0]));
     a2 = Integer.parseInt(vmas[1]);
+
     int sum = a1 - a2;
 
     x = x + sum;
     if (rab.equals("R")) {
-      x = atr(x);
+      if (a1 < a2) {
+        throw new Exception();
+      } else {
+        x = atr(x);
+      }
     }
     return x;
   }
@@ -170,7 +165,7 @@ class Main {
       vmas[0] = rta(vmas[0]);
       vmas[1] = rta(vmas[1]);
     }
-    aprim(vmas[0], vmas[1], inputString);
+    uslovieOdinakPologChiselOt1Do10(vmas[0], vmas[1]);
     int a1 = 0, a2 = 0;
     String x = "";
     a1 = Integer.parseInt((vmas[0]));
@@ -193,7 +188,7 @@ class Main {
       vmas[0] = rta(vmas[0]);
       vmas[1] = rta(vmas[1]);
     }
-    aprim(vmas[0], vmas[1], inputString);
+    uslovieOdinakPologChiselOt1Do10(vmas[0], vmas[1]);
     int a1 = 0, a2 = 0;
     String x = "";
     a1 = Integer.parseInt((vmas[0]));
@@ -236,12 +231,13 @@ class Main {
   }
 
   //проверка рим + араб на исключение
-  private static void aprim(String a, String b, String c) throws Exception {
-
-    if (Integer.parseInt(a) >= 1 && Integer.parseInt(b) >= 1 && Integer.parseInt(a) <= 10 && Integer.parseInt(b) <= 10) {
-    } else {
-      throw new Exception();
+  private static void uslovieOdinakPologChiselOt1Do10(String a, String b) throws Exception {
+    try {
+      if (Integer.parseInt(a) >= 1 && Integer.parseInt(b) >= 1 && Integer.parseInt(a) <= 10 && Integer.parseInt(b) <= 10) {
+      } else {
+        throw new Exception();
+      }
+    } finally {
     }
   }
-
 }
