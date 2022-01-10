@@ -1,14 +1,19 @@
-//Ты можешь добавлять свои импорты
+public class Var2Calk {
+  public static void main(String[] args) {
+    String[] in = {"1+1+2", null, "II- I", "5+V", "   I  +  I", "V-VI", " 4 + 3,5 ", " 4.5 + 3 ", "     9 - 10       ", "  -1   ", "   4  -  1   ", "1 ", "2-1", "10+11", "1 - 2", "2*3", "2*0", "3/2", "4/0", "I+V", "VI-IV", "IX*V", "X/VII", "1-2+2", "", "III+XIII", "XI+XV"};
+    try {
 
-//решение должно содержать данный класс
-class Main {
 
-  //Решение должно содержать данный метод
+      for (String s : in) {
+        System.out.println("Входящие данные: (" + s + ") расчитанные данные = [" + calc(s) + "]");
+      }
+    }catch (Exception e){System.err.println("исключение операций по выражению (" + in + ") " + e);}
+  }
   public static String calc(String inputString) throws Exception{
     String ravno = "";
-      inputString = inputString.toUpperCase();//Регистр вверх
-      inputString = chist(inputString);//чистим от пробелов
-      ravno = ravno(inputString, romOrArab(inputString));
+    inputString = inputString.toUpperCase();//Регистр вверх
+    inputString = chist(inputString);//чистим от пробелов
+    ravno = ravno(inputString, romOrArab(inputString));
 
     return ravno;
   }
@@ -221,13 +226,14 @@ class Main {
 
   //проверка рим + араб на исключение
   private static void uslovieOdinakPologChiselOt1Do10(String a, String b) throws Exception {
-   // try {
-      if (Integer.parseInt(a) >= 1 && Integer.parseInt(b) >= 1 && Integer.parseInt(a) <= 10 && Integer.parseInt(b) <= 10) {
-      }
-      else {
-        throw new Exception();
-      }
+    // try {
+    if (Integer.parseInt(a) >= 1 && Integer.parseInt(b) >= 1 && Integer.parseInt(a) <= 10 && Integer.parseInt(b) <= 10) {
+    }
+    else {
+      throw new Exception();
+    }
     //} finally {
     //}
   }
 }
+

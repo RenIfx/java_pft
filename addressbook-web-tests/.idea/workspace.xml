@@ -112,14 +112,7 @@
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
-      <module name="adressbook-web-tests.main" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="Application.Var2Calk">
     <configuration name="Mate" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Mate" />
       <module name="adressbook-web-tests.main" />
@@ -134,8 +127,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NewJob" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="NewJob" />
+    <configuration name="New_Job" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="New_Job" />
       <module name="adressbook-web-tests.main" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -148,13 +141,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Var2Calk" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Var2Calk" />
+      <module name="adressbook-web-tests.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Var2Calk" />
+        <item itemvalue="Application.Mate" />
         <item itemvalue="Application.Sum" />
         <item itemvalue="Application.NJ" />
-        <item itemvalue="Application.NewJob" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.Mate" />
+        <item itemvalue="Application.New_Job" />
       </list>
     </recent_temporary>
   </component>
@@ -193,14 +193,19 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/NewJob.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/NJ.java</url>
           <line>61</line>
           <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Mate.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="121" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Mate.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="122" />
         </line-breakpoint>
         <line-breakpoint type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/Sum.java</url>
@@ -212,7 +217,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
-          <line>108</line>
+          <line>97</line>
           <properties class="Main" method="sum">
             <option name="EMULATED" value="true" />
           </properties>
@@ -220,7 +225,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
-          <line>61</line>
+          <line>50</line>
           <properties class="Main" method="romOrArab">
             <option name="EMULATED" value="true" />
           </properties>
@@ -228,7 +233,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
-          <line>95</line>
+          <line>84</line>
           <properties class="Main" method="vid">
             <option name="EMULATED" value="true" />
           </properties>
@@ -236,7 +241,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/Main.java</url>
-          <line>233</line>
+          <line>222</line>
           <properties class="Main" method="uslovieOdinakPologChiselOt1Do10">
             <option name="EMULATED" value="true" />
           </properties>

@@ -1,18 +1,50 @@
-/*public class Mate {
-  public static void doSomething() {
-    try {
-      throw new NullPointerException("demo");
-    } catch (NullPointerException e) {
-      System.out.println("Перехвачено внутри doSomething.");
-      throw e; // повторно возбудить исключение
-    }
-  }
-
+import java.util.ArrayList;
+public class Mate {
   public static void main(String[] args) {
-    try {
-      doSomething();
-    } catch (NullPointerException e) {
-      System.out.println("ПОВТОРНЫЙ перехват: " + e);
-    }
+    int[] a = {4, 6, 7, 1, 3};
+    int[] b = {1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 9, 9, 9, 8};
+    int[] c = {4, 6, 7, 1, 3};
+    int[] d = {4, 6, 7, 1, 3};
+    // incrementer(c);
+   /* redKnight(-10, 4);
+    redKnight(0, -18);
+    redKnight(0, 7);
+    redKnight(1, 6);
+    redKnight(1, 5);
+    */
+    getVowels("asdfghjkliu");
   }
-}*/
+public static String getVowels(String input) {
+    // WRITE YOUR CODE BELOW THIS LINE
+    if(input==null){return null;}
+    char [] g = input.toCharArray();
+    String a="";
+    for (char i:g)
+    {
+      if(i=='a'){a=a+i;continue;}
+      if(i=='e'){a=a+i;continue;}
+      if(i=='o'){a=a+i;continue;}
+      if(i=='u'){a=a+i;continue;}
+      if(i=='y'){a=a+i;continue;}
+      if(i=='i'){a=a+i;continue;}
+
+    }
+  System.out.println(a);
+    return a;
+    // WRITE YOUR CODE ABOVE THIS LINE
+  }
+}
+
+/*
+По городу ходит автобус, который забирает и высаживает несколько человек на каждой автобусной остановке.
+
+Вам предоставляется список (или массив) целочисленных пар. Элементы каждой пары представляют количество людей, садящихся в автобус (первый элемент) и количество людей, выходящих из автобуса (второй элемент) на автобусной остановке.
+
+Ваша задача - вернуть количество людей, которые все еще находятся в автобусе после последней автобусной остановки (после последнего массива). Несмотря на то, что это последняя остановка автобуса, автобус не пуст и некоторые люди все еще находятся в автобусе, и они, вероятно, там спят: D
+
+Взгляните на тестовые примеры.
+
+Имейте в виду, что тестовые примеры гарантируют, что количество людей в автобусе всегда> = 0. Таким образом, возвращаемое целое число не может быть отрицательным.
+
+Второе значение в первом массиве целых чисел равно 0, так как автобус пуст на первой автобусной остановке.
+* */
